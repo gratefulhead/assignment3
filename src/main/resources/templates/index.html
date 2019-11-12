@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Assignment 3</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h1>Search movie</h1>
+
+<form class="form-group col-md-4" action="#" method="post" th:action="@{/search}" th:object="${movie}">
+    <div class="form-group">
+        <label for="movieTitleInput">Movie title:</label>
+        <input type="text" class="form-control" id="movieTitleInput" th:field="*{title}">
+    </div>
+    <div class="form-group">
+        <label for="genres">Genres:</label>
+        <input type="text" class="form-control" id="genres" th:field="*{genres}">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+<table class="table" th:if="${!movies.empty}">
+    <thead>
+    <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Main actor</th>
+        <th scope="col">IMDB score</th>
+        <th scope="col">Genres</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${movies.empty}">
+        <td colspan="2">No movies available</td>
+    </tr>
+    <tr th:each="movie : ${movies}">
+        <th scope="row" th:text="${movie.title}"><</th>
+        <th scope="row" th:text="${movie.actor1Name}"></th>
+        <th scope="row" th:text="${movie.imdbScore}"></th>
+        <th scope="row" th:text="${movie.genres}"></th>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
